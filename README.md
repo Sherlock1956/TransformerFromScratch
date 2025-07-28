@@ -24,7 +24,7 @@
   - 温度采样，核采样实现
   - 在测试集上测试模型损失函数
 
-该项目特别关注在TinyStories数据集上的预训练和测试，并对模型结构和超参数进行了详细的实验和分析，包括：
+该项目特别关注在TinyStories数据集上的预训练和测试，并对模型结构和超参数进行了详细的实验和分析，具体分析文档见test_logs，包括：
 
 - 探究模型的不同超参数对模型训练结果的影响
 - 探究不同的模型结构（Layer norm位置，RoPE，SwiGLU or SiLU等）对模型训练结果的影响
@@ -133,6 +133,14 @@ pip install .
 
 - 数据集下载
 
+使用TinyStories数据集：
+
+**训练集**: 2.12M tokens
+
+**验证集**: 22K tokens
+
+TinyStories是专门为小型语言模型设计的数据集，包含简单的儿童故事，适合用作简单模型的预训练语料。
+
 ```bash
 mkdir -p data
 cd data
@@ -142,8 +150,6 @@ wget https://huggingface.co/datasets/roneneldan/TinyStories/resolve/main/TinySto
 
 cd ..
 ```
-
-
 
 ### 2. 训练BPE分词器
 
@@ -176,44 +182,5 @@ python test/test_my_lm.py    # 文本生成测试，可自定文本前缀生成�
 python test/val_my_lm.py     # 在测试集上测试交叉熵损失
 ```
 
-## 数据集
-
-使用TinyStories数据集：
-- **训练集**: 2.12M tokens
-- **验证集**: 22K tokens
-
-TinyStories是专门为小型语言模型设计的数据集，包含简单的儿童故事。
-
-## 文本生成
-
-模型支持多种采样策略：
-- **贪心解码**: temperature=0
-- **Top-k采样**: 限制候选token数量
-- **Top-p采样**: 核采样（Nucleus Sampling）
-- **温度采样**: 控制生成随机性
-
-具体参数设置见test/test_my_lm.py
 
 
-## 技术特色
-
-1. **完全从零实现**: 所有组件都是手工实现，无依赖现有框架
-2. **现代架构**: 使用RMSNorm、RoPE、SwiGLU等现代Transformer改进
-3. **数值稳定**: 注重数值稳定性，避免梯度爆炸和下溢问题
-4. **高效训练**: 支持梯度裁剪、学习率调度等训练技巧
-5. **完整流程**: 从数据预处理到模型推理的完整pipeline
-
-## 性能监控
-
-使用TensorBoard记录训练指标：
-- 训练/验证损失
-- 学习率变化
-- 梯度范数
-
-## 实验探究
-
-本实验还探究了不同设置对模型的影响，记录了：
-- 超参数对训练效果的影响
-- 不同模型结构的对比实验
-
-具体分析文档见test_logs
