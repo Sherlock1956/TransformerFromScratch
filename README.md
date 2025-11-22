@@ -182,5 +182,18 @@ python test/test_my_lm.py    # 文本生成测试，可自定文本前缀生成�
 python test/val_my_lm.py     # 在测试集上测试交叉熵损失
 ```
 
+⚠️ Academic Honesty Notice  
+This repository contains my solutions to assignments for CS336 (2025).  
+It is shared **for educational and reference purposes only**.
 
+- ✅ You are welcome to:  
+  - Study the code to understand concepts  
+  - Run experiments locally  
+  - Cite this work (with attribution)  
+
+- ❌ Please do **NOT**:  
+  - Submit this code (or minor modifications) as your own coursework  
+  - Use it to violate your institution's academic integrity policy  
+
+If you're taking CS336 (or similar), try solving problems yourself first — you’ll learn more! 😊
 
